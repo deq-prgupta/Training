@@ -1,4 +1,6 @@
 from django.shortcuts import render,get_object_or_404
+from django.views.decorators.http import require_http_methods
+
 
 # Create your views here.
 from django.http import HttpResponse,HttpResponseRedirect
@@ -55,6 +57,7 @@ def index(request):
     # return HttpResponse(output)
     # return HttpResponse("Hello, world. You're at the polls index.")
 
+@require_http_methods(['GET'])
 def detail(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     return render(request, 'polls/detail.html', {'question': question})
